@@ -17,6 +17,10 @@ import com.sidm.notekeeper.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +33,15 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Spinner spinnerCourses = findViewById(R.id.spinner_courses);
+        List<CourseInfo> courses = DataManager.getInstance().getCourses();
+
+        ArrayAdapter<CourseInfo> adapterCourses =
+                new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, courses);
+
+        adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCourses.setAdapter(adapterCourses);
 
         setSupportActionBar(binding.toolbar);
 
